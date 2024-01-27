@@ -1,0 +1,52 @@
+{
+  "name": "@con3x/web3-plugin-areon",
+  "version": "0.0.1-alpha.1",
+  "description": "web3.js plugin for areon",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "keywords": [
+    "areon",
+    "eth",
+    "plugin",
+    "web3",
+    "web3js",
+    "web3.js",
+    "blockchain"
+  ],
+  "homepage": "https://github.com/con3x/web3-plugin-areon#readme",
+  "bugs": {
+    "url": "https://github.com/con3x/web3-plugin-areon/issues"
+  },
+  "scripts": {
+    "lint": "eslint '{src,test}/**/*.ts'",
+    "lint-fix": "eslint '{src,test}/**/*.ts' --fix",
+    "build": "tsc --project tsconfig.build.json",
+    "test": "jest --config=./jest.config.js",
+    "test-coverage": "jest --config=./jest.config.js --collect-coverage --coverage"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/con3x/web3-plugin-areon.git"
+  },
+  "dependencies": {
+    "bech32": "^2.0.0",
+    "crypto-addr-codec": "^0.1.8"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "@types/node": "^20.2.6",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.5.0",
+    "jest-extended": "^4.0.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^5.3.3",
+    "web3": "4.3.0"
+  },
+  "peerDependencies": {
+    "web3": ">= 4.0.3"
+  }
+}
