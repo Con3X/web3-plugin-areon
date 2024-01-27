@@ -21,7 +21,6 @@
     "strict": true,
     "strictNullChecks": true,
     "outDir": "lib",
-    "esModuleInterop": true,
     "typeRoots": ["./node_modules/@types"]
   },
   "include": ["src", "test", "jest.config.js"],
