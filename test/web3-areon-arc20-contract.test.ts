@@ -12,7 +12,7 @@ describe('test Contracts at web3.areon.contracts', () => {
   afterAll(() => {});
 
   it('can call ARC20 contract methods', async () => {
-    const devTokenContract = await web3.areon.Contracts.ARC20('0x811abcac79de50cdf432462282e8c16eb4aca70d');
+    const devTokenContract = await web3.areon.Contracts.ARC20('0xb8082fa72bd534eb0fa124a0ea8fb9824356fd74');
     const balance = await devTokenContract.methods.balanceOf('0xccd517c6f596512b7290040f58a6ddb492da7a9f').call();
     expect(balance).toBeDefined();
     expect(typeof balance).toBe('bigint');

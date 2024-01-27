@@ -26,8 +26,9 @@ It is good to know that, Areon uses `bech32` that is prefixed with `areon` for n
 
 ```ts
 
-// The same functions bellow are accessed also with `new AreonPlugin().AddressConverter...`
-// And also with web3.areon.AddressConverter... (after registering the plugin at a web3 instance mentioned in the next section)
+// The same functions below are accessible also with `new AreonPlugin().AddressConverter...`
+// And, if you registered the plugin, you can access them with web3.areon.AddressConverter...
+// However, it is simpler to call them as follow:
 
 import { AddressConverter } from 'web3-plugin-areon';
 
@@ -52,7 +53,9 @@ currently ARC-20 for Tokens, and ARC-721 for NFTs, which you can find here: http
 
 This plugin provides easy access to contracts following the ARC-20 and ARC-721 and would continue to provide support for other ARCs added to https://github.com/Areon-Network/ARCs/ whether they are for tokens or any others.
 
-#### ex. Getting the Balance of a ARC-20 Token Holder
+Because ARC-20 and ARC-721 are Smart Contracts, and because this is would not be necessarily the case other ARCs, they are organized under `web3.areon.Contracts.ARC20` and `web3.areon.Contracts.ARC721`. This is also to remind you that those are just normal web3.js contracts that you can interact with the same way you would do with any other smart contract. Except that, this plugin make the contracts objects ready for you. And, without this plugin you would need to generate the ABI and the ByteCode as in this tutorial: https://docs.web3js.org/guides/smart_contracts/smart_contracts_guide. 
+
+#### ex. Getting the Balance of an ARC-20 Token Holder and number of NFTs Owned
 
 To check things quickly, clone this repo, go to the `test` folder, update or keep the code, and then run `yarn && yarn test` in the terminal.
 
@@ -67,17 +70,33 @@ Or import and use the plugin package inside your TypeScript project following th
 import { Web3 } from 'web3';
 import { AreonPlugin } from '@con3x/web3-plugin-areon';
 
-// the following shows how to use the plugin
-// you can call any rpc method using the convention:
-// web3.areon.<network>.rpc.<namespace>.<method>
 async function main() {
   const web3 = new Web3('https://testnet-rpc.areon.network');
   web3.registerPlugin(new AreonPlugin());
   
-  // to get the balance of a token holder:
-  const devTokenContract = await web3.areon.Contracts.ARC20('0x811abcac79de50cdf432462282e8c16eb4aca70d');
-  const balance = await devTokenContract.methods.balanceOf('0xccd517c6f596512b7290040f58a6ddb492da7a9f').call();
-  console.log('The balance of devToken at test net for 0xccd517c6f596512b7290040f58a6ddb492da7a9f, in wie, is:', balance);
+  // to get the token balance of an account:
+  const devTokenContract = await web3.areon.Contracts.ARC20(
+    '0xb8082fa72bd534eb0fa124a0ea8fb9824356fd74'
+  );
+  const arc20balance = await devTokenContract.methods
+    .balanceOf('0x6e994beb7015e68db2ce06fffe365e489f90b64d')
+    .call();
+  console.log(
+    'The balance of devToken at test net for 0xccd517c6f596512b7290040f58a6ddb492da7a9f, is:',
+    Web3.utils.fromWei(arc20balance, 'ether')
+  );
+
+  // to get the number of nft owned by an account:
+  const numberOfNftOwned = await web3.areon.Contracts.ARC721(
+    '0x811abcac79de50cdf432462282e8c16eb4aca70d'
+  );
+  const nftNumber = await numberOfNftOwned.methods
+    .balanceOf('0xccd517c6f596512b7290040f58a6ddb492da7a9f')
+    .call();
+  console.log(
+    'The number of AreonTestnetNft owned by 0xccd517c6f596512b7290040f58a6ddb492da7a9f, is:',
+    nftNumber
+  );
   
 }
 main();

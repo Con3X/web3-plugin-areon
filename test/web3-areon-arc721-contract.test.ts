@@ -12,7 +12,7 @@ describe('test Contracts at web3.areon.contracts', () => {
   afterAll(() => {});
 
   it('can call ARC721 contract methods', async () => {
-    const areonTestnetNft = await web3.areon.Contracts.ARC721('0x15e6ab3269a6d89ea685714cc565bfc833c14284');
+    const areonTestnetNft = await web3.areon.Contracts.ARC721('0x811abcac79de50cdf432462282e8c16eb4aca70d');
     const balance = await areonTestnetNft.methods.balanceOf('0xccd517c6f596512b7290040f58a6ddb492da7a9f').call();
     expect(balance).toBeDefined();
     expect(typeof balance).toBe('bigint');
